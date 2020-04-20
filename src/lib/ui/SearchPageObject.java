@@ -22,6 +22,20 @@ abstract public class SearchPageObject extends MainPageObject {
         super(driver);
     }
 
+    public boolean checkTitleInArticle(String title, int countOfArticleForChecking, List<WebElement> listOfArticles) {
+        int count = 0;
+        for (int i = 0; i < countOfArticleForChecking; i++) {
+            if (listOfArticles.get(i).getText().contains(title))
+                System.out.println(listOfArticles.get(i).getText());
+            count++;
+        }
+        if (count == countOfArticleForChecking) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public void openArticleWithDescription(String description) {
         String descriptionXpath = replaceTemplate(SEARCH_RESULT_DESCRIPTION_BY_SUBSTRING_TPL, description);
         this.waitForElementAndClick(

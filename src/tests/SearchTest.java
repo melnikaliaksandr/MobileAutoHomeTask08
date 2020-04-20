@@ -40,4 +40,18 @@ public class SearchTest extends CoreTestCase {
         assertTrue("Count of articles less than 2", resultAfterClickCancelButton);
     }
 
+    @Test
+    public void testThreeArticlesVerification() {
+
+        SearchPageObject searchPageObject = SearchPageObjectFactory.get(driver);
+
+        searchPageObject.skipOnboarding();
+        searchPageObject.initSearchInput();
+        String title = "Android";
+        searchPageObject.typeSearchLine(title);
+        List<WebElement> listOfArticles = searchPageObject.getListOfElements();
+        assertTrue("Error in article of title",
+                searchPageObject.checkTitleInArticle(title, 3, listOfArticles));
+    }
+
 }
